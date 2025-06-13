@@ -1,0 +1,46 @@
+{
+    "log": {
+        "loglevel": "warning"
+    },
+    "routing": {
+        "domainStrategy": "AsIs",
+        "rules": [
+            {
+                "type": "field",
+                "ip": [
+                    "geoip:private"
+                ],
+                "outboundTag": "block"
+            }
+        ]
+    },
+    "inbounds": [
+        {
+            "listen": "0.0.0.0",
+            "port": 8008,
+            "protocol": "vless",
+            "settings": {
+                "clients": [
+                    {
+                        "id": "8d4a8f5e-c2f7-4c1b-b8c0-f8f5a9b6c384"
+                    }
+                ],
+                "decryption": "Tester-nani"
+            },
+            "streamSettings": {
+                "network": "ws",
+                "security": "none"
+            }
+        }
+    ],
+    "outbounds": [
+        {
+            "protocol": "freedom",
+            "tag": "direct"
+        },
+        {
+            "protocol": "blackhole",
+            "tag": "block"
+        }
+    ]
+}
